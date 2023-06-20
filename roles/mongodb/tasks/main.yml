@@ -1,3 +1,26 @@
-- name: task mongodb setup
-  debug:
-    msg: mongodb setup
+- name: Copy file
+  ansible.builtin.copy:
+    src: mongo.repo
+    dest: /etc/yum.repos.d/mongo.repo
+
+- name: Install Mongodb
+  ansible.builtin.yum:
+    name: mongodb-org
+    state: installed
+
+- name: Update Listener
+  ansible.builtin.replace:
+    path: /etc/mongod.conf
+    regexp: '127.0.0.1'
+    replace: '0.0.0.0'
+
+- name: Enable and Start Mongodb
+  ansible.builtin.systemd:
+    state: started
+    name: mongod
+    enabled: true
+
+
+
+
+
