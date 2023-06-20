@@ -1,0 +1,3 @@
+- name: task mysql setup
+  debug:
+    msg: mysql setup
