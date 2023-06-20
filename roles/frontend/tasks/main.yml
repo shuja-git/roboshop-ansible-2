@@ -1,3 +1,29 @@
-- name: task frontend setup
-  debug:
-    msg: frontend setup
+#print_head "Copying into roboshop conf"
+#cp ${code_dir}/configs/nginx-roboshop.conf /etc/nginx/default.d/roboshop.conf
+#status_check $?
+#print_head "Enabling Nginx"
+#systemctl enable nginx &>>${log_file}
+#status_check $?
+#print_head "Starting Nginx"
+#systemctl restart nginx &>>${log_file}
+#status_check $?
+
+- name: Install Nginx
+  ansible.builtin.yum:
+    name: nginx
+    state: installed
+
+- name: remove old content/directory
+  ansible.builtin.file:
+    path: /usr/share/nginx/html/
+    state: absent
+
+- name: Unarchive and downloaded Frontend
+  ansible.builtin.unarchive:
+    src: https://roboshop-artifacts.s3.amazonaws.com/frontend.zip
+    dest: /tmp/frontend.zip
+    remote_src: yes
+
+
+
+
