@@ -1,5 +1,5 @@
 - name: Install Redis repo
-  ansible.builtin.shell: https://rpms.remirepo.net/enterprise/remi-release-8.rpm
+  ansible.builtin.shell: https://rpms.remirepo.net/enterprise/remi-release-8.rpm -y
 
 - name: Install a modularity appstream with defined stream
   ansible.builtin.dnf:
