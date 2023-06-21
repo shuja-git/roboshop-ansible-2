@@ -1,3 +1,5 @@
-- name: task cart setup
-  debug:
-    msg: cart setup
+- name: Load Nodejs
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: nodejs
+
