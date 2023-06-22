@@ -19,13 +19,29 @@
 #    fi
 #
 #  }
-- name: Copy file
-  ansible.builtin.copy:
-    src: mongo.repo
-    dest: /etc/yum.repos.d/mongo.repo
+- name: MongoDB Schema
+  when: schema_type == "mongo"
+  block:
+    - name: Setup MongoDB repo file
+      ansible.builtin.copy:
+        src: mongo.repo
+        dest: /etc/systemd/system/mongo.repo
 
-- name: Install mongo client
-  ansible.builtin.yum:
-    name: mongodb-org-shell
-    state: installed
+    - name: Install MongoDB Client
+      ansible.builtin.yum:
+        name: mongodb-org-shell
+        state: installed
 
+    - name: Load Schema
+      ansible.builtin.shell: mongo --host mongodb-dev.shujadevops.online </app/schema/${component}.js
+
+- name: MySQL Schema
+  when: schema_type == "mysql"
+  block:
+    - name: Install MySQL Client
+      ansible.builtin.yum:
+        name: mysql
+        state: installed
+
+    - name: Load Schema
+      ansible.builtin.shell: mysql -h mysql-dev.shujadevops.online -uroot -pRoboShop@1 < /app/schema/{{component}}.sql
