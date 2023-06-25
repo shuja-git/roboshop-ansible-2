@@ -25,7 +25,7 @@
     - name: Setup MongoDB repo file
       ansible.builtin.copy:
         src: mongo.repo
-        dest: /etc/systemd/system/mongo.repo
+        dest: /etc/yum.repos.d/mongo.repo
 
     - name: Install MongoDB Client
       ansible.builtin.yum:
@@ -44,4 +44,4 @@
         state: installed
 
     - name: Load Schema
-      ansible.builtin.shell: mysql -h mysql-dev.shujadevops.online -uroot -pRoboShop@1 < /app/schema/{{component}}.sql
+      ansible.builtin.shell: mysql -h mysql-dev.shujadevops.online -uroot -pRoboShop@1 < /app/schema/{{ component }}.sql
