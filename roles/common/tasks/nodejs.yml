@@ -18,14 +18,14 @@
 #      chdir: /app
 #
 #
-#- name: schema-setup
-#  ansible.builtin.import_tasks:
-#    file: schema_setup.yml
-#  when: schema_type is defined
+- name: schema-setup
+  ansible.builtin.import_tasks:
+    file: schema_setup.yml
+  when: schema_type is defined
 #
-#- name: systemd-setup
-#  ansible.builtin.import_tasks:
-#    file: systemd-setup.yml
+- name: systemd-setup
+  ansible.builtin.import_tasks:
+    file: systemd-setup.yml
 #
 
 

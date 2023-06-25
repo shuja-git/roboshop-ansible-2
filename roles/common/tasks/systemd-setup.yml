@@ -18,5 +18,12 @@
 #  }
 - name: Copy file
   ansible.builtin.copy:
-    src: catalogue.service
-    dest: /etc/systemd/system/${component}.service
+    src: "{{ component }}.service"
+    dest: /etc/systemd/system/{{component}}.service
+
+- name: Start and enable servier
+  ansible.builtin.systemd:
+    state: restarted
+    name: "{{ component }}"
+    enabled: true
+    daemon-reload: true
