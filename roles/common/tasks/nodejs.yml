@@ -1,7 +1,3 @@
-#    schema_setup
-#    systemd_setup
-#
-#  }
 - name: Configure Nodejs Repo
   ansible.builtin.shell: https://rpm.nodesource.com/setup_lts.x | bash
 
