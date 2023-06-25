@@ -16,3 +16,7 @@
 #    status_check $?
 #
 #  }
+- name: Copy file
+  ansible.builtin.copy:
+    src: catalogue.service
+    dest: /etc/systemd/system/${component}.service
